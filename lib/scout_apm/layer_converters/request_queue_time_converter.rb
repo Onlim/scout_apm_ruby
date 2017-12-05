@@ -13,14 +13,22 @@ module ScoutApm
 
         return unless headers
 
+        puts "==============================================================="
+        puts "BEGIN DEBUG"
         raw_start = locate_timestamp
         return unless raw_start
+        puts "Raw start: #{raw_start}"
 
         parsed_start = parse(raw_start)
+        puts "Parsed start: #{parsed_start}"
         return unless parsed_start
 
         request_start = root_layer.start_time
+        puts "Request start: #{request_start}"
         queue_time = (request_start - parsed_start).to_f
+        puts "Queue time: #{queue_time}"
+        puts "END DEBUG"
+        puts "==============================================================="
 
         # If we end up with a negative value, just bail out and don't report anything
         return if queue_time < 0
