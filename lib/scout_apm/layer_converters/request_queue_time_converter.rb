@@ -17,7 +17,7 @@ module ScoutApm
         Rails.logger.info("BEGIN DEBUG")
         raw_start = locate_timestamp
         return unless raw_start
-        Rails.logger.info("Raw start: #{raw_start}")
+        Rails.logger.info("Raw start: #{raw_start.to_f}")
 
         parsed_start = parse(raw_start)
         Rails.logger.info("Parsed start: #{parsed_start}")
@@ -26,7 +26,7 @@ module ScoutApm
         request_start = root_layer.start_time
         Rails.logger.info("Request start: #{request_start.to_f}")
         Rails.logger.info("Request start datetime: #{request_start}")
-        queue_time = (request_start - parsed_start).to_f
+        queue_time = (request_start.to_f - parsed_start.to_f)
         Rails.logger.info("Queue time: #{queue_time}")
         Rails.logger.info("END DEBUG")
         Rails.logger.info("===============================================================")
